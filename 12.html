@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>시간 앱♥</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #FFFAFF;
+      margin-top: 200px;
+    }
+
+    h1 {
+      background-color: lightpink;
+      color: #333;
+      padding: 10px 0;
+    }
+
+    .button {
+      background-color: hotpink;
+      border: none;
+      color: white;
+      padding: 12px 38px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .button:hover {
+      background-color: #FFD2F5;
+    }
+   
+    .reset-button {
+     padding: 10px 23px;
+     display: block;
+     margin: 0 auto;
+   }
+
+    #startTime,
+    #endTime,
+    #duration {
+      font-size: 20px;
+      color: #555;
+    }
+  </style>
+  
+  <script>
+    var startTime, endTime;
+
+    function startRecording() {
+      startTime = new Date();
+      document.getElementById('startTime').innerHTML = startTime.toLocaleTimeString();
+    }
+
+    function stopRecording() {
+      endTime = new Date();
+      document.getElementById('endTime').innerHTML = endTime.toLocaleTimeString();
+      calculateDuration();
+    }
+
+    function calculateDuration() {
+      var duration = endTime - startTime;
+      var milliseconds = duration % 1000;
+      duration = (duration - milliseconds) / 1000;
+      var seconds = duration % 60;
+      duration = (duration - seconds) / 60;
+      var minutes = duration % 60;
+      var hours = (duration - minutes) / 60;
+      document.getElementById('duration').innerHTML = hours + "시간 " + minutes + "분 " + seconds + "초";
+    }
+
+    function resetRecording() {
+      document.getElementById('startTime').innerHTML = "";
+      document.getElementById('endTime').innerHTML = "";
+      document.getElementById('duration').innerHTML = "";
+    }
+  </script>
+</head>
+<body>
+  <h1>총 시간 기록 앱★</h1>
+  <button class="button" onclick="startRecording()">기록 시작</button>
+  <button class="button" onclick="stopRecording()">기록 정지</button>
+  <button class="button reset-button" onclick="resetRecording()">리셋</button>
+  <p>시작 시간: <span id="startTime"></span></p>
+  <p>종료 시간: <span id="endTime"></span></p>
+  <p>기록된 시간: <span id="duration"></span></p>
+</body>
+</html>
